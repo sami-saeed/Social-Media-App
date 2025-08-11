@@ -1,17 +1,23 @@
-<h1>Your Posts</h1>
+<!-- Background wrapper -->
+<div class="bg-themed">
 
-<%= link_to "Create New Post", new_post_path %>
+  <!-- Header: Title + Create Button -->
+  <div class="container">
+    <div class="posts-header">
+      <h1>All Posts</h1>
+      <%= button_to "➕ New Post", new_post_path, method: :get, class: "btn btn-primary shadow-sm" %>
+    </div>
 
-<% if @posts.any? %>
-  <ul>
-    <% @posts.each do |post| %>
-      <li>
-        <%= link_to post.title, post_path(post) %>
-        (<%= link_to "Edit", edit_post_path(post) %> |
-         <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>)
-      </li>
+    <!-- Posts list -->
+    <% if @all_posts.any? %>
+      <div class="row g-4 posts-list">
+        <%= render partial: "posts/show", collection: @all_posts, as: :post %>
+      </div>
+    <% else %>
+      <div class="alert alert-info text-center">
+        No posts found. Be the first to create one!
+      </div>
     <% end %>
-  </ul>
-<% else %>
-  <p>You have no posts yet.</p>
-<% end %>
+  </div>
+  
+</div>

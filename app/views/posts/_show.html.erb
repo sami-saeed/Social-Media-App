@@ -1,0 +1,42 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-5">
+
+          <!-- Post Title -->
+          <h1 class="text-center text-dark fw-bold mb-4 border-bottom pb-3">
+            <%= link_to post.title, post_path(post), class: "text-decoration-none text-dark" %>
+          </h1>
+
+          <!-- Post Content -->
+          <div class="mb-5 fs-5 text-muted" style="white-space: pre-wrap;">
+            <%= simple_format(post.content) %>
+          </div>
+
+          <!-- Comments Toggle -->
+          <div data-controller="toggle">
+            <h4 data-action="click->toggle#toggle"
+                class="text-center text-secondary mb-4 border-top pt-3"
+                style="cursor: pointer;">
+              🗨️ View & Add Comments
+            </h4>
+
+            <div data-toggle-target="section" class="d-none">
+              <!-- Comment Form -->
+              <div class="mb-4">
+                <%= render partial: "comments/commentform", locals: { post: post } %>
+              </div>
+
+              <!-- All Comments -->
+              <div class="comments">
+                <%= render partial: "comments/repliesform", collection: post.comments, as: :comment %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

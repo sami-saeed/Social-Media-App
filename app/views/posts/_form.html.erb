@@ -1,21 +1,26 @@
-<%= form_with model: post, local: true do |form| %>
+<%= form_with model: post, local: true, class: "needs-validation" do |form| %>
   <% if post.errors.any? %>
-    <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert-danger">
+      <h5 class="alert-heading">Please fix the following errors:</h5>
+      <ul class="mb-0">
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label fw-bold" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter post title" %>
   </div>
 
-  <div>
-    <%= form.label :content %><br>
-    <%= form.text_area :content %>
+  <div class="mb-3">
+    <%= form.label :content, class: "form-label fw-bold" %>
+    <%= form.text_area :content, class: "form-control", placeholder: "Write your content here...", rows: 5 %>
   </div>
 
-  <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit "Save Post", class: "btn user-btn px-4" %>
+  </div>
 <% end %>

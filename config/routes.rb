@@ -1,13 +1,32 @@
 Rails.application.routes.draw do
-  
+  get "notifications/index"
+  root "posts#index"
+
   devise_for :users
-  
+
 
   authenticate :user do
-    resources :posts
-    resources :users, only: [:index,:show]
-    
+    resources :posts do
+      resources :comments, only: [ :create ] do
+      end
+    end
+
+
+    resources :comments do
+      resources :comments, only: [ :create, :destroy ]
+      resource :like, only: [ :create, :destroy ]
+    end
+
+    resources :users, only: [ :index, :show ]
+
+
+    resources :notifications, only: [ :index ] do
+  member { patch :mark_as_read }
+  collection { patch :mark_all_read }
+end
   end
+
+
 
   # Root path logic: guests see home, users see posts
   authenticated :user do
@@ -18,7 +37,7 @@ Rails.application.routes.draw do
     root to: "home#index", as: :unauthenticated_root
   end
 
- 
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -1,0 +1,19 @@
+// app/assets/stylesheets/application.scss
+
+@import "variables";
+@import "bootstrap";
+// @import "bootstrap-icons/font/bootstrap-icons";
+@import "navbar";
+@import "posts";
+@import "users";
+@import "comments";
+@import "posts_form";
+
+$bg-color: #2a70b6;
+
+body {
+
+  h1 {
+    color: #333;
+  }
+}

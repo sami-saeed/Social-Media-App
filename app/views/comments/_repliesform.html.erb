@@ -1,0 +1,63 @@
+<div class="comment-box" data-controller="toggle">
+  <!-- Commenter Name -->
+  <div class="comment-meta mb-1">
+    <strong class="text-color"><%= comment.user.username %></strong>
+    <span class="text-muted small ms-2"><%= time_ago_in_words(comment.created_at) %> ago</span>
+  </div>
+
+  <!-- Comment Body and Delete -->
+  <div class="d-flex justify-content-between align-items-start">
+    <p class="comment-body mb-1 w-100 pe-2">
+      <%= comment.content %>
+    </p>
+    <%= button_to "🗑️", comment_path(comment), method: :delete, class: "btn btn-sm btn-light" %>
+  </div>
+
+  <!-- Actions Row -->
+  <div class="comment-actions d-flex align-items-center gap-3 mt-2">
+    <!-- Like -->
+    <% if user_signed_in? %>
+      <% if comment.likes.exists?(user_id: current_user.id) %>
+        <%= button_to "❤️ #{comment.likes.count}", comment_like_path(comment),
+              method: :delete,
+              class: "btn btn-sm " %>
+      <% else %>
+        <%= button_to "🤍 #{comment.likes.count}", comment_like_path(comment),
+              method: :post,
+              class: "btn btn-sm " %>
+      <% end %>
+    <% else %>
+      <span class="badge bg-secondary">❤️ <%= comment.likes.count %></span>
+    <% end %>
+
+    <!-- Reply -->
+    <span data-action="click->toggle#toggleReply"
+          class="small text-color fw-semibold"
+          style="cursor:pointer;">
+      Reply
+    </span>
+
+    <!-- View Comments -->
+    <% if comment.replies.any? %>
+      <span data-action="click->toggle#toggleView"
+            class="small text-color fw-semibold"
+            style="cursor:pointer;">
+        View Comments
+      </span>
+    <% end %>
+  </div>
+
+  <!-- Reply Section -->
+  <div class="nested-comment mt-2 d-none" data-toggle-target="replySection">
+    <%= render partial: "comments/commentform", locals: { parent_comment: comment, post: comment.post } %>
+  </div>
+
+  <!-- View Comments Section -->
+  <% if comment.replies.any? %>
+    <div class="nested-comment mt-2 d-none" data-toggle-target="viewSection">
+      <% comment.replies.each do |reply| %>
+        <%= render partial: "comments/repliesform", locals: { comment: reply } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

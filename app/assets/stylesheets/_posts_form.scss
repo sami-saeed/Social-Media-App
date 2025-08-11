@@ -1,0 +1,41 @@
+/* _posts_form.scss */
+
+/* Full page background same as posts/user show */
+.post-form-bg {
+  background: linear-gradient(135deg, #e8fff5, #47d38d, #e8fff5);
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  font-family: $main-font;
+}
+
+/* Card styling same as other pages */
+.post-form-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 2rem;
+}
+
+/* Title styling */
+.post-form-card h1 {
+  font-weight: 800;
+  color: $text-dark;
+}
+
+/* Reuse button hover from posts.scss */
+.user-btn {
+  background-color: $accent-color;
+  border: none;
+  color: $text-dark;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+    color: $text-light;
+    transform: translateY(-2px) scale(1.02);
+  }
+}

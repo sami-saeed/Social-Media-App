@@ -1,0 +1,32 @@
+// _variables.scss
+
+// Theme base colors
+$primary-color: #3b82f6;    // Vibrant Blue
+$accent-color: #fbbf24;    // Golden Amber
+$secondary-color: #22c55e; // Fresh Green
+$warning-color: #f87171;   // Soft Red
+$info-color: #38bdf8;      // Sky Blue
+$light-gray: #f8f9fa; // Soft, light grey (used in Bootstrap too)
+
+// Backgrounds
+$navbar-bg: #1f2937;       // Dark Gray (already used)
+$page-bg: #27a566;         // Soft Gray-Blue
+$card-bg: #f4fff9;         // White
+$card-hover-bg: #f9fafb;   // Slight off-white
+
+// Text
+$text-dark: #023020;
+$text-light: #f9fafb;
+$text-muted: #2d2d2d;
+
+// Shadows & radius
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+$border-radius: 0.75rem;
+
+$bg-start: #fbe8ff;
+$bg-middle: #e0f4ff;
+$bg-end: #f8ffe8;
+
+
+$main-font: 'Segoe UI', system-ui, sans-serif;
+

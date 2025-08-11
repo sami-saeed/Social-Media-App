@@ -1,0 +1,18 @@
+<% parent_comment ||= nil %>
+
+<%= form_with model: [parent_comment || post, Comment.new], local: true do |form| %>
+  <div class="comment-box comment-form-card shadow-sm mb-4">
+    <div class="comment-body position-relative">
+      
+      <%= form.text_area :content,
+            class: "form-control",
+            placeholder: parent_comment ? "Write a reply..." : "Write a comment...",
+            rows: 3 %>
+   
+      <div class="position-absolute bottom-0 end-0 p-2">
+        <%= form.submit(parent_comment ? "Reply" : "Comment", class: "btn btn-reply btn-sm px-3") %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

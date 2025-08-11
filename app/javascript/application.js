@@ -1,6 +1,12 @@
+import "@hotwired/turbo-rails"
+import { Application } from "@hotwired/stimulus"
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 import * as bootstrap from "bootstrap"
-import "@rails/ujs"
-import Rails from "@rails/ujs"
-Rails.start()
 
 
+
+
+
+const application = Application.start()
+eagerLoadControllersFrom("controllers", application)
+Add

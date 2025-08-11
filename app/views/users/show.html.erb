@@ -1,27 +1,49 @@
-<h1><%= @user.username %>'s Profile</h1>
+<div class="user-show-bg">
+  <div class="container">
+    <div class="user-profile-card">
+      <div class="d-flex justify-content-between align-items-center">
+        
+        <!-- Left: User Info -->
+        <div>
+          <h1><%= @user.username %>'s Profile</h1>
+          <p><strong>Email:</strong> <%= @user.email %></p>
 
-<p><strong>Email:</strong> <%= @user.email %></p>
+          <% if current_user == @user %>
+            <div class="d-flex p-2">
+              <%= button_to "Edit Account", edit_user_registration_path, method: :get, class: "btn user-btn btn-sm me-2" %>
+              <%= button_to "Create New Post", new_post_path, method: :get, class: "btn user-btn btn-sm me-2" %>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn user-btn btn-danger btn-sm" %>
+            </div>
+          <% end %>
+        </div>
 
-<% if current_user == @user %>
-  <%= link_to "Edit Account", edit_user_registration_path %> |
-  <%= link_to "Create New Post", new_post_path %> |
-  <%= link_to "Sign Out", destroy_user_session_path, method: :delete%>
-<% end %>
+        <!-- Right: Avatar -->
+        <% if current_user.avatar.attached? %>
+          <div class="me-5 mt-3">
+            <%= image_tag url_for(current_user.avatar), width: 200, height: 200, class: "user-avatar" %>
+          </div>
+        <% end %>
 
-<hr>
+      </div>
 
-<h2>Posts</h2>
+      <hr>
 
-<% if @posts.any? %>
-  <ul>
-    <% @posts.each do |post| %>
-      <li>
-        <%= link_to post.title, post_path(post) %>
-        <small> — <%= time_ago_in_words(post.created_at) %> ago</small>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p><%= @user == current_user ? "You haven't written any posts yet." : "This user hasn't posted anything yet." %></p>
-<% end %>
-
+      <!-- Posts -->
+      <h2>Posts</h2>
+      <% if @posts.any? %>
+        <ul>
+          <% @posts.each do |post| %>
+            <li>
+              <%= link_to post.title, post_path(post) %>
+              <small> — <%= time_ago_in_words(post.created_at) %> ago</small>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>
+          <%= @user == current_user ? "You haven't written any posts yet." : "This user hasn't posted anything yet." %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

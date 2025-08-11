@@ -15,52 +15,76 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-
-   
-
   </head>
 
   <body>
+    <nav class="navbar-custom">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand fs-4 fw-bold" href="/">Postoria</a>
 
+        <div class="d-flex align-items-center">
+          <% if user_signed_in? %>
+            <div data-controller="notifications" class="position-relative me-3">
+              <a href="#" 
+                 data-action="click->notifications#toggle"
+                 data-notifications-bell-target="bell"
+                 class="nav-link text-light position-relative" 
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                🔔
+                <span id="unread_count" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">
+                  <%= current_user.notifications.unread.count %>
+                </span>
+              </a>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">Social Media App</a>
+              <div data-notifications-target="list" 
+                   id="notifications_list" 
+                   class="notifications-list" 
+                   style="display: none; position: absolute; right: 0; background: white; border: 1px solid #ccc; width: 320px; max-height: 300px; overflow-y: auto; z-index: 1000;">
+                <ul id="notifications_menu" class="list-unstyled mb-0 p-2">
+                  <% current_user.notifications.order(created_at: :desc).limit(5).each do |notification| %>
+                    <li class="notification-item px-2 py-1 border-bottom">
+                      <%= notification.action %> — <%= time_ago_in_words(notification.created_at) %> ago
+                    </li>
+                  <% end %>
+                </ul>
+                <div class="text-center p-2 border-top">
+                  <%= link_to "View All", notifications_path, class: "text-primary text-decoration-none" %>
+                </div>
+              </div>
+            </div>
 
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item me-2 d-flex align-items-center text-white">
-            Logged in as <strong class="ms-1"><%= current_user.username %></strong>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-light ms-2" %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= button_to "Login", new_user_session_path, method: :get, class: "btn btn-outline-light me-2" %>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Sign Up", new_user_registration_path, method: :get, class: "btn btn-outline-success" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
+            <!-- User Info -->
+            <div class="me-3 d-flex align-items-center">
+              <strong class="me-2 text-light">
+                <%= link_to current_user.username, user_path(current_user), class: "link-success text-decoration-none" %>
+              </strong>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag url_for(current_user.avatar), class: "rounded-circle", width: 40, height: 40 %>
+              <% end %>
+            </div>
 
-<% if notice %>
-  <div class="alert alert-success text-center mb-0">
-    <%= notice %>
-  </div>
-<% end %>
+            <!-- Logout -->
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn user-btn text-dark btn-sm" %>
 
-<% if alert %>
-  <div class="alert alert-danger text-center mb-0">
-    <%= alert %>
-  </div>
-<% end %>
+          <% else %>
+            <%= button_to "Login", new_user_session_path, method: :get, class: "btn user-btn text-dark btn-sm me-2" %>
+            <%= button_to "Sign Up", new_user_registration_path, method: :get, class: "btn user-btn text-dark btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="alert alert-success text-center py-2 shadow-sm">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger text-center py-2 shadow-sm">
+        <%= alert %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

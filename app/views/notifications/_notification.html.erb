@@ -1,0 +1,12 @@
+<div id="<%= dom_id(notification) %>" class="notification <%= 'unread' if notification.read_at.nil? %> p-2">
+  <%= link_to polymorphic_path(notification.notifiable || root_path), class: "d-block" do %>
+    <strong><%= notification.actor.username %></strong>
+    <%= notification.action %>
+    <% if notification.notifiable.present? %>
+      — <%= truncate(notification.notifiable.try(:content) || notification.notifiable.try(:title), length: 80) %>
+    <% end %>
+    <small class="text-muted d-block"><%= time_ago_in_words(notification.created_at) %> ago</small>
+  <% end %>
+
+  <%= button_to "Mark read", mark_as_read_notification_path(notification), method: :patch, form: { data: { turbo: true } }, class: "btn btn-sm btn-outline-secondary mt-1" %>
+</div>

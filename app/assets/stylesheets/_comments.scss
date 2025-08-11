@@ -1,0 +1,60 @@
+/* Comment box styling */
+.comment-box {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Meta info (username & time) */
+.comment-meta {
+  font-size: 0.9rem;
+}
+
+/* Comment text */
+.comment-body {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Comment actions (like, delete, etc.) */
+.comment-actions .btn {
+  border-radius: $border-radius-sm;
+}
+
+/* Reply form inside comments */
+.comment-box .comment-form-card {
+  background-color: rgba(248, 249, 250, 0.8);
+  box-shadow: none;
+}
+
+/* Nested replies indentation */
+.nested-comment {
+  margin-left: 2rem; /* indent replies */
+  border-left: 3px solid lighten($text-dark, 20%);
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+/* Reply button style (from earlier) */
+.btn-reply {
+  background-color: rgb(92, 66, 10);
+  color: $text-light;
+  border: none;
+  font-weight: 600;
+  border-radius: $border-radius-sm;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+}
+
+.text-color {
+
+  color: rgb(88, 64, 11);
+
+}

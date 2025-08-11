@@ -1,29 +1,18 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow p-4 w-100" style="max-width: 800px;">
+<div class="bg-themed">
 
-    <!-- Title -->
-    <h1 class="card-title text-center text-primary mb-4 border-bottom pb-3">
-      <%= @post.title %>
-    </h1>
+  <!-- Render post partial -->
+  <%= render partial: 'posts/show', locals: { post: @post } %>
 
-    <!-- Content -->
-    <div class="card-text mb-5" style="white-space: pre-wrap;">
-      <%= simple_format(@post.content) %>
-    </div>
-
-    <!-- Buttons -->
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <%= button_to "Edit", edit_post_path(@post), method: :get,
-          class: "btn btn-primary px-4" %>
-
+  <!-- Buttons -->
+  <div class="mt-2 d-flex justify-content-center gap-3 flex-wrap">
+    <% if @post.user == current_user %>
+      <%= button_to "Edit", edit_post_path(@post), method: :get, class: "btn user-btn px-4" %>
       <%= button_to "Delete", post_path(@post), method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: "btn btn-danger px-4" %>
+                    data: { confirm: "Are you sure?" },
+                    class: "btn user-btn btn-danger px-4" %>
+    <% end %>
 
-      <%= button_to "Back to Posts", posts_path,
-          method: :get,
-          class: "btn btn-secondary px-4" %>
-    </div>
-
+    <%= button_to "Back to Posts", posts_path, method: :get, class: "btn user-btn btn-secondary px-4" %>
   </div>
+
 </div>

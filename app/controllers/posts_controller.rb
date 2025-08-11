@@ -1,12 +1,14 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [ :edit, :update, :destroy ]
 
   def index
     @posts = current_user.posts
+    @all_posts = Post.all
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -41,7 +43,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts.find(params[:id]) 
+    @post = current_user.posts.find(params[:id])
   end
 
   def post_params
