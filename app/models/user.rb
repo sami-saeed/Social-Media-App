@@ -10,9 +10,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
   has_many :sent_notifications, class_name: "Notification", foreign_key: :actor_id, dependent: :destroy
-
-
-
+  has_many :mentions_received, foreign_key: :mentioned_user_id, class_name: "Mention", dependent: :destroy
+  has_many :mentions_made, foreign_key: :mentioner_id, class_name: "Mention", dependent: :destroy
 
   validates :username, presence: true
 end

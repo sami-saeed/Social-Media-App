@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Social Media" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,21 +24,25 @@
 
         <div class="d-flex align-items-center">
           <% if user_signed_in? %>
+           
             <div data-controller="notifications" class="position-relative me-3">
-              <a href="#" 
+              <a href="#"
                  data-action="click->notifications#toggle"
-                 data-notifications-bell-target="bell"
-                 class="nav-link text-light position-relative" 
-                 role="button" aria-haspopup="true" aria-expanded="false">
+                 data-notifications-target="bell"
+                 class="nav-link text-light position-relative"
+                 role="button"
+                 aria-haspopup="true"
+                 aria-expanded="false">
                 🔔
-                <span id="unread_count" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">
+                <span id="unread_count"
+                      class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">
                   <%= current_user.notifications.unread.count %>
                 </span>
               </a>
 
-              <div data-notifications-target="list" 
-                   id="notifications_list" 
-                   class="notifications-list" 
+              <div data-notifications-target="list"
+                   id="notifications_list"
+                   class="notifications-list"
                    style="display: none; position: absolute; right: 0; background: white; border: 1px solid #ccc; width: 320px; max-height: 300px; overflow-y: auto; z-index: 1000;">
                 <ul id="notifications_menu" class="list-unstyled mb-0 p-2">
                   <% current_user.notifications.order(created_at: :desc).limit(5).each do |notification| %>
@@ -47,8 +51,11 @@
                     </li>
                   <% end %>
                 </ul>
-                <div class="text-center p-2 border-top">
-                  <%= link_to "View All", notifications_path, class: "text-primary text-decoration-none" %>
+                <div class="d-flex justify-content-center align-items-center p-2">
+                  <%= button_to "View All", notifications_path, method: :get, class: "btn user-btn btn-sm mt-1 me-2" %>
+                  <%= button_to "Mark All read", mark_all_as_read_notifications_path, method: :patch,
+                                 form: { data: { turbo: true } },
+                                 class: "btn user-btn btn-sm mt-1" %>
                 </div>
               </div>
             </div>

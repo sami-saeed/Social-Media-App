@@ -5,17 +5,13 @@ class NotificationsController < ApplicationController
   end
 
   def mark_as_read
-    @notification = current_user.notifications.find(params[:id])
-    @notification.mark_as_read!
-    respond_to do |format|
-      format.html { redirect_to notifications_path, notice: "Notification marked as read." }
-      format.turbo_stream
-    end
+  @notification = current_user.notifications.find(params[:id])
+    @notification.update(read_at: Time.current)
+    redirect_to notifications_path, notice: "Notification marked as read."
   end
 
-
-  def mark_all_read
-    current_user.notifications.unread.update_all(read_at: Time.current)
+  def mark_all_as_read
+    current_user.notifications.where(read_at: nil).update_all(read_at: Time.current)
     redirect_to notifications_path, notice: "All notifications marked as read."
   end
 end

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
     resources :notifications, only: [ :index ] do
   member { patch :mark_as_read }
-  collection { patch :mark_all_read }
+  collection { patch :mark_all_as_read }
 end
   end
 
@@ -38,6 +38,8 @@ end
   end
 
 
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -50,4 +52,5 @@ end
 
   # Defines the root path route ("/")
   # root "posts#index"
+  mount ActionCable.server => "/cable"
 end
