@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resource :like, only: [ :create, :destroy ]
     end
 
+    get "/users/all_usernames", to: "users#all_usernames"
     resources :users, only: [ :index, :show ]
 
 
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
   collection { patch :mark_all_as_read }
 end
   end
-
 
 
   # Root path logic: guests see home, users see posts

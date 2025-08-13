@@ -1,0 +1,25 @@
+[data-mention-autocomplete-target="dropdown"] {
+  display: none;           // hidden by default
+  list-style: none;        // remove bullets
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  background: #fff;        // white background
+  border: 1px solid #ccc;  // light border
+  border-radius: 6px;      // rounded corners
+  max-height: 200px;       // scrollable max height
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // subtle shadow
+}
+
+[data-mention-autocomplete-target="dropdown"] li {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+[data-mention-autocomplete-target="dropdown"] li:hover {
+  background-color: #f0f0f0;  // highlight on hover
+  font-weight: 500;            // slightly bolder
+}

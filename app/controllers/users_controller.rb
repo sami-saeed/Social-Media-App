@@ -10,4 +10,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @posts = @user.posts
   end
+
+
+  def all_usernames
+    usernames = User.pluck(:username)
+    render json: usernames
+  end
 end

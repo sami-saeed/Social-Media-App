@@ -8,6 +8,7 @@
  //= link controllers/hello_controller.js
   //= link controllers/index.js
     //= link controllers/toggle_controller.js
+     //= link controllers/mention_autocomplete_controller.js
       //= link controllers/notifications_controller.js
     
     //= link application.css

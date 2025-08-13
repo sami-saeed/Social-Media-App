@@ -46,6 +46,15 @@ def create
           action: "commented on your post"
         )
       end
+      # Notify parent comment author if replying to a comment and not self
+      if @comment.parent.present? && @comment.parent.user != current_user
+        Notification.create(
+          recipient: @comment.parent.user,
+          actor: current_user,
+          notifiable: @comment,
+          action: "replied to your comment"
+        )
+      end
     end
 
     redirect_back fallback_location: root_path, notice: "Comment Posted"
@@ -53,8 +62,6 @@ def create
     redirect_back fallback_location: root_path, alert: "Error Posting Comment"
   end
 end
-
-
 
 
   def destroy
