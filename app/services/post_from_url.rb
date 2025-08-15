@@ -1,5 +1,6 @@
 # app/services/post_from_url.rb
 require "open-uri"
+require "uri"
 
 class PostFromUrl
   def initialize(url, current_user)
@@ -9,10 +10,12 @@ class PostFromUrl
 
   def call
     scraped = LinkScraper.new(@url).call
+    platform_info = detect_platform(@url)
 
     post = Post.new(
       title:   scraped[:title].presence || "Imported post",
-      content: scraped[:text].presence  || "No text found."
+      content: scraped[:text].presence  || "No text found.",
+      platform_logo: platform_info[:logo],
     )
     post.user = @current_user
 
@@ -36,5 +39,23 @@ class PostFromUrl
     record.image.attach(io: io, filename: filename)
   rescue => e
     Rails.logger.warn("Image attach failed: #{e.class}: #{e.message}")
+  end
+
+
+  def detect_platform(url)
+    host = URI.parse(url).host
+     return nil unless host
+
+     host = host.sub(/^www\./, "") # Normalize to remove www prefix
+      case host
+      when /facebook\.com/i
+    { name: "Facebook", logo: "https://logo.clearbit.com/facebook.com" }
+      when /twitter\.com/i, /x\.com/i
+    { name: "Twitter", logo: "https://logo.clearbit.com/twitter.com" }
+      when /instagram\.com/i
+    { name: "Instagram", logo: "https://logo.clearbit.com/instagram.com" }
+      else
+    { name: host.capitalize, logo: "https://logo.clearbit.com/#{host}" }
+      end
   end
 end

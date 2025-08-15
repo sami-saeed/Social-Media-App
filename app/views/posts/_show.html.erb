@@ -7,6 +7,9 @@
           <!-- Post Title -->
           <h1 class="text-center text-dark fw-bold mb-4 border-bottom pb-3">
             <%= link_to post.title, post_path(post), class: "text-decoration-none text-dark" %>
+            <% if post.platform_logo.present? %>
+            <%= image_tag post.platform_logo, alt: "Platform Logo", width: 40 %>
+            <% end %>
           </h1>
 
           <!-- Post Content and Image -->
