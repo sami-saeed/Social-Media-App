@@ -1,4 +1,4 @@
-<%= form_with model: post, local: true, class: "needs-validation" do |form| %>
+<%= form_with model: post, local: true, class: "needs-validation", html: { multipart: true } do |form| %>
   <% if post.errors.any? %>
     <div class="alert alert-danger">
       <h5 class="alert-heading">Please fix the following errors:</h5>
@@ -18,6 +18,11 @@
   <div class="mb-3">
     <%= form.label :content, class: "form-label fw-bold" %>
     <%= form.text_area :content, class: "form-control", placeholder: "Write your content here...", rows: 5 %>
+  </div>
+
+	<div class="mb-3">
+    <%= form.label :image, class: "form-label fw-bold" %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
 
   <div class="text-end">

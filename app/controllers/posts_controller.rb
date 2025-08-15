@@ -24,6 +24,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def import
+    @post = PostFromUrl.new(params[:url], current_user).call
+    if @post.save
+      redirect_to @post, notice: "Post created from URL successfully."
+    else
+      redirect_to posts_path, alert: "Error creating post from URL."
+    end
+  end
+
   def edit
   end
 
@@ -40,6 +49,7 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "Post deleted successfully."
   end
 
+
   private
 
   def set_post
@@ -47,6 +57,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :image)
   end
 end

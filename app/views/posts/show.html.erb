@@ -2,8 +2,7 @@
 
   <!-- Render post partial -->
   <%= render partial: 'posts/show', locals: { post: @post } %>
-
-  <!-- Buttons -->
+  </div><!-- Buttons -->
   <div class="mt-2 d-flex justify-content-center gap-3 flex-wrap">
     <% if @post.user == current_user %>
       <%= button_to "Edit", edit_post_path(@post), method: :get, class: "btn user-btn px-4" %>

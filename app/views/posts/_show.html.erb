@@ -9,10 +9,21 @@
             <%= link_to post.title, post_path(post), class: "text-decoration-none text-dark" %>
           </h1>
 
-          <!-- Post Content -->
-          <div class="mb-5 fs-5 text-muted" style="white-space: pre-wrap;">
-            <%= simple_format(post.content) %>
+          <!-- Post Content and Image -->
+          <div class="mb-5 fs-5 text-muted d-flex flex-column w-100">
+            <% if post.image.attached? %>
+              <%= image_tag post.image,
+              alt: "Post Image",
+              class: "img-fluid w-100 mb-3",
+              style: "object-fit: cover;" %>
+            <% end %>
+            <hr/>
+            <div>
+              <%= simple_format(post.content) %>
+            </div>
           </div>
+
+
 
           <!-- Comments Toggle -->
           <div data-controller="toggle">

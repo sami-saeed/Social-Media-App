@@ -38,7 +38,7 @@ def create
       end
 
       # Notify post owner only if no mentioned users and post owner is not comment author
-      if mentioned_users.empty? && @post.user != current_user
+      if mentioned_users.empty? && @post.user != current_user && !@comment.parent
         Notification.create!(
           actor: current_user,
           recipient: @post.user,
@@ -53,6 +53,12 @@ def create
           actor: current_user,
           notifiable: @comment,
           action: "replied to your comment"
+        )
+         Notification.create!(
+          actor: current_user,
+          recipient: @post.user,
+          notifiable: @comment,
+          action: "commented on your post"
         )
       end
     end

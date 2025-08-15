@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["section","replySection", "viewSection"]
 
   toggle() {
-    debugger;
     this.sectionTarget.classList.toggle("d-none")
   }
 

@@ -3,9 +3,13 @@
 
   <!-- Header: Title + Create Button -->
   <div class="container">
-    <div class="posts-header">
+    <div class="posts-header d-flex align-items-center justify-content-between mb-4">
       <h1>All Posts</h1>
       <%= button_to "➕ New Post", new_post_path, method: :get, class: "btn btn-primary shadow-sm" %>
+    </div>
+    <div class="mt-3">
+      <h3>Want to create a post from URL?</h3>
+      <%= render "posts/import_form" %>
     </div>
 
     <!-- Posts list -->

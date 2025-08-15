@@ -16,3 +16,4 @@
   //= link channels/consumer.js
     //= link channels/index.js
      //= link channels/notifications_channel.js
+       //= link channels/link_scraper_channel.js

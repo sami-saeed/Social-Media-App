@@ -21,6 +21,9 @@ gem "jbuilder"
 gem "devise"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
+gem "ferrum"        # headless Chrome control
+gem "nokogiri"      # nice to have for some parsing fallbacks
+gem "sidekiq"
 gem "jsbundling-rails"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]

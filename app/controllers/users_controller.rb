@@ -4,13 +4,10 @@ class UsersController < ApplicationController
     @users=User.all
   end
 
-
-
   def show
     @user = User.find_by(id: params[:id])
     @posts = @user.posts
   end
-
 
   def all_usernames
     usernames = User.pluck(:username)

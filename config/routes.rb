@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :posts do
+      collection do
+        post :import
+      end
+    end
+
 
     resources :comments do
       resources :comments, only: [ :create, :destroy ]
@@ -22,9 +28,9 @@ Rails.application.routes.draw do
 
 
     resources :notifications, only: [ :index ] do
-  member { patch :mark_as_read }
-  collection { patch :mark_all_as_read }
-end
+      member { patch :mark_as_read }
+      collection { patch :mark_all_as_read }
+    end
   end
 
 
@@ -53,4 +59,7 @@ end
   # Defines the root path route ("/")
   # root "posts#index"
   mount ActionCable.server => "/cable"
+
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
 end

@@ -1,0 +1,9 @@
+<%= form_with url: import_posts_path, method: :post, local: true, data: { turbo: true } do |f| %>
+  <div class="mb-3">
+    <%= f.label :url, "Import from URL" %>
+    <%= f.text_field :url, class: "form-control", placeholder: "Paste a public post URL" %>
+  </div>
+
+  <%= f.submit "Import", class: "btn user-btn" %>
+<% end %>
+ 

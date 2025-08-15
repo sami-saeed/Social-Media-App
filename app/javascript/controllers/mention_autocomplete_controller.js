@@ -15,7 +15,7 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data=>{
         this.allUsernames = data
-        console.log("Fetched usernames:", this.allUsernames)
+        
       })
   }
 
@@ -37,7 +37,7 @@ export default class extends Controller {
     const filtered = this.allUsernames.filter(username =>
       username.toLowerCase().startsWith(partialUsername.toLowerCase())
     )
-    console.log("Filtered usernames:", filtered)
+    
     
     filtered.forEach(username => {
       const li = document.createElement("li")

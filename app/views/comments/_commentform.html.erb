@@ -12,11 +12,11 @@
             placeholder: parent_comment ? "Write a reply..." : "Write a comment...",
             rows: 3 %>
 
-    <ul 
-  data-mention-autocomplete-target="dropdown"
-  style="display:block; list-style:none; margin:0; padding:0; position:absolute; background:white; border:1px solid #ccc; max-height:150px; overflow-y:auto; z-index:1000;"
-    >
-    </ul>
+      <ul 
+      data-mention-autocomplete-target="dropdown"
+      style="display:none; list-style:none; margin:0; padding:0; position:absolute; background:white; border:1px solid #ccc; max-height:150px; overflow-y:auto; z-index:1000;"
+      >
+      </ul>
 
       <div class="position-absolute bottom-0 end-0 p-2">
         <%= form.submit(parent_comment ? "Reply" : "Comment", class: "btn btn-reply btn-sm px-3") %>
