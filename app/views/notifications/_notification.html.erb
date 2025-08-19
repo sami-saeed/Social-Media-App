@@ -1,5 +1,6 @@
 <div id="<%= dom_id(notification) %>" class="notification <%= 'unread' if notification.read_at.nil? %> p-2">
-  <%= link_to polymorphic_path(notification.notifiable.try(:post) || root_path), class: "d-block" do %>
+  <% target = notification.notifiable.try(:post) || root_path %>
+  <%= link_to target, class: "d-block" do %>
     <strong><%= notification.actor.username %></strong>
     <%= notification.action %>
     <% if notification.notifiable.present? %>
