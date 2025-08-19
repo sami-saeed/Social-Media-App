@@ -1,8 +1,8 @@
-<div class="bg-themed">
+<div class="bg-themed row g-2 posts-list">
 
   <!-- Render post partial -->
   <%= render partial: 'posts/show', locals: { post: @post } %>
-  </div><!-- Buttons -->
+  <!-- Buttons -->
   <div class="mt-2 d-flex justify-content-center gap-3 flex-wrap">
     <% if @post.user == current_user %>
       <%= button_to "Edit", edit_post_path(@post), method: :get, class: "btn user-btn px-4" %>
@@ -10,7 +10,6 @@
                     data: { confirm: "Are you sure?" },
                     class: "btn user-btn btn-danger px-4" %>
     <% end %>
-
     <%= button_to "Back to Posts", posts_path, method: :get, class: "btn user-btn btn-secondary px-4" %>
   </div>
 

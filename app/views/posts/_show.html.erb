@@ -1,24 +1,22 @@
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-lg-10 col-xl-8">
+    <div class="col-md-8 col-lg-6 col-xl-5">
       <div class="card shadow border-0 rounded-4">
         <div class="card-body p-5">
 
           <!-- Post Title -->
-          <h1 class="text-center text-dark fw-bold mb-4 border-bottom pb-3">
+          
+          <h5 class="text-center text-dark fw-bold mb-4 border-bottom pb-3">
             <%= link_to post.title, post_path(post), class: "text-decoration-none text-dark" %>
-            <% if post.platform_logo.present? %>
-            <%= image_tag post.platform_logo, alt: "Platform Logo", width: 40 %>
-            <% end %>
-          </h1>
+          </h5>
 
           <!-- Post Content and Image -->
-          <div class="mb-5 fs-5 text-muted d-flex flex-column w-100">
+          <div class="mb-3 fs-6 text-muted d-flex flex-column w-100">
             <% if post.image.attached? %>
               <%= image_tag post.image,
               alt: "Post Image",
-              class: "img-fluid w-100 mb-3",
-              style: "object-fit: cover;" %>
+              style: "object-fit: cover;",
+              class: "d-block mx-auto scraped-img" %>
             <% end %>
             <hr/>
             <div>
@@ -31,9 +29,18 @@
           <!-- Comments Toggle -->
           <div data-controller="toggle">
             <h4 data-action="click->toggle#toggle"
-                class="text-center text-secondary mb-4 border-top pt-3"
+                class="d-flex justify-content-between align-items-center text-secondary fs-6 border-top pt-3"
                 style="cursor: pointer;">
-              🗨️ View & Add Comments
+              <span>🗨️ View & Add Comments</span>
+
+               <% if post.platform_logo.present? %>
+                <%= image_tag post.platform_logo,
+                alt: "Platform Logo", 
+                width: 20,
+                title: "Imported from #{post.platform_name}",
+                class: "ms-2"
+            %>
+            <% end %>
             </h4>
 
             <div data-toggle-target="section" class="d-none">

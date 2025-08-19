@@ -16,6 +16,7 @@ class PostFromUrl
       title:   scraped[:title].presence || "Imported post",
       content: scraped[:text].presence  || "No text found.",
       platform_logo: platform_info[:logo],
+      platform_name: platform_info[:name]
     )
     post.user = @current_user
 

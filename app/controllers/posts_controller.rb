@@ -25,12 +25,8 @@ class PostsController < ApplicationController
   end
 
   def import
-    @post = PostFromUrl.new(params[:url], current_user).call
-    if @post.save
-      redirect_to @post, notice: "Post created from URL successfully."
-    else
-      redirect_to posts_path, alert: "Error creating post from URL."
-    end
+    LinkScraperJob.perform_async(params[:url], current_user.id)
+  redirect_to posts_path, notice: "Post import is in progress."
   end
 
   def edit

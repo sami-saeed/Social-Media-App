@@ -14,7 +14,7 @@
 
     <!-- Posts list -->
     <% if @all_posts.any? %>
-      <div class="row g-4 posts-list">
+      <div class="row g-2 posts-list">
         <%= render partial: "posts/show", collection: @all_posts, as: :post %>
       </div>
     <% else %>

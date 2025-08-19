@@ -41,6 +41,8 @@
 .posts-list {
   .card {
     background-color: $card-bg;
+    max-width: 500px;
+    height:auto;
     border: none;
     border-radius: $border-radius;
     box-shadow: $box-shadow;
@@ -83,6 +85,15 @@
   min-height: 100vh;
   padding: 3rem 1rem;
   font-family: $main-font;
+}
+
+.scraped-img {
+  max-height : 350px;   // makes sure it never overflows
+  height: auto;  
+  max-width: 100%;    // keeps proportions
+  border-radius: 12px;  
+  object-fit: cover; // makes it nicely cropped if used with fixed height
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 }
