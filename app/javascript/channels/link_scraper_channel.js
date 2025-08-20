@@ -1,4 +1,4 @@
-import consumer from "./consumer"
+import consumer from "channels/consumer"
 
 document.addEventListener("DOMContentLoaded", () => {
   const postShow = document.querySelector("[data-post-id]")

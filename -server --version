@@ -1,0 +1,14 @@
+[0;1;32m●[0m redis-server.service - Advanced key-value store
+     Loaded: loaded (/lib/systemd/system/redis-server.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Wed 2025-08-20 11:11:33 EDT; 58s ago
+       Docs: http://redis.io/documentation,
+             man:redis-server(1)
+   Main PID: 269166 (redis-server)
+      Tasks: 4 (limit: 28651)
+     Memory: 1.8M
+     CGroup: /system.slice/redis-server.service
+             └─269166 /usr/bin/redis-server 127.0.0.1:6379
+
+Aug 20 11:11:33 dev-Latitude-E5570 systemd[1]: Starting Advanced key-value store...
+Aug 20 11:11:33 dev-Latitude-E5570 systemd[1]: redis-server.service: Can't open PID file /run/redis/redis-server.pid (yet?) after start: Operation not permitted
+Aug 20 11:11:33 dev-Latitude-E5570 systemd[1]: Started Advanced key-value store.
