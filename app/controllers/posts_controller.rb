@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   def import
     LinkScraperJob.perform_async(params[:url], current_user.id)
-  redirect_to posts_path, notice: "Post import is in progress."
+    redirect_to posts_path, notice: "Post import is in progress."
   end
 
   def edit
@@ -42,6 +42,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    
     redirect_to posts_path, notice: "Post deleted successfully."
   end
 

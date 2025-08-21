@@ -1,20 +1,20 @@
 class CommentsController < ApplicationController
   def create
-    if params[:post_id]
-      # Comment on a post
-      @post = Post.find(params[:post_id])
-      @comment = @post.comments.build(comment_params)
-      @comment.user = current_user
-    else
-      # Reply to a comment
-      @parent_comment = Comment.find(params[:comment_id])
-      @post = @parent_comment.post
-      @comment = @post.comments.build(comment_params)
-      @comment.user = current_user
-      @comment.parent = @parent_comment
-    end
+   if params[:post_id]
+    # Comment on a post
+    post = Post.find(params[:post_id])
+    comment = post.comments.build(comment_params)
+    comment.user = current_user
+   else
+    # Reply to a comment
+    parent_comment = Comment.find(params[:comment_id])
+    post = parent_comment.post
+    comment = post.comments.build(comment_params)
+    comment.user = current_user
+    comment.parent = parent_comment
+   end
 
-    if @comment.save
+    if comment.save
       redirect_back fallback_location: root_path, notice: "Comment Posted"
     else
       redirect_back fallback_location: root_path, alert: "Error Posting Comment"
@@ -39,24 +39,3 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 end
-
-
-
-
-
-# def broadcast_notification
-# return unless @comment&.persisted?
-#  recipient = @comment.post.user
-# return if recipient.id == current_user.id
-#  ActionCable.server.broadcast(
-#  Rails.logger.info "📢 Broadcasting to notifications_#{recipient.id}",
-#  "notifications_#{recipient.id}",
-#  {
-#    notification: @notification,
-#    html: ApplicationController.renderer.render(
-#      partial: "notifications/notification",
-#      locals: { notification: @notification }
-# )
-# }
-# )
-# end

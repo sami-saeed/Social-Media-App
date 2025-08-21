@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
     users = User.where(username: usernames)
 
     users.each do |user|
-      next if user ==  current_user # skip self mentions
+      next if user ==  self.user # skip self mentions
 
       Mention.find_or_create_by!(
         comment: self,
